@@ -9,11 +9,14 @@ import asyncio
 # Initializing bot and variables
 client = discord.Client()
 finalmessage = ""
+weedercount = 0
+weeder = ""
 
-YOURTOKEN = # Your token
-YOURGUILDSID = # Your server ID
-YOURID = # Your user ID
-YOURFILENAME = # Whatever file name you want
+
+YOURTOKEN = "NzQxNTA1NjA0NTM0Nzk2MzQ4.Xy4i6A.w8bXySm0-6NO31H9JVOXgv0NJxE"
+YOURGUILDSID = 691931904135397417
+YOURID = 146026805365571585
+YOURFILENAME = "whatever.json"
 
 #initializing empty json file
 m = {}
@@ -55,12 +58,16 @@ async def on_message(message):
     # Getting variables
     global m
     global finalmessage
+    global weedercount
+    global weeder
+
 
     # Used to pause counters if you need to edit the script
-    if message.content == "!stop" and message.author.id == YOURID:
+    if message.content.lower() == "!stopweed" and message.author.id == YOURID:
         with open(YOURFILENAME, "w") as j:
             j.write( json.dumps(m) )
             j.close()
+        await message.channel.send("Weed counts saved :)")
         await client.close()
 
     # !weed returns personal weed count
@@ -71,7 +78,15 @@ async def on_message(message):
     elif message.content == "!weederboard":
         # Getting weeds of whole server and putting into one string, so it doesn't spam chat
         for member in client.get_guild(YOURGUILDSID).members:
-            finalmessage += (str(member).rstrip("#") + ": " + str(m[str(member.id)]["xp"]) +  " weeds \n")
+            if not str(str(member).rstrip("#1234567890")).lower().endswith("bot") and not str(str(member).rstrip("#1234567890")).lower().endswith("rythm"):
+                finalmessage += (str(member).rstrip("#1234567890") + ": " + str(m[str(member.id)]["xp"]) +  " weeds \n")
+                if int(str(m[str(member.id)]["xp"])) > weedercount:
+                    weeder = (str(member).rstrip("#1234567890"))
+        finalmessage += "\n"
+        finalmessage += "The current weeder is "
+        finalmessage += weeder
+
+
         await message.channel.send(finalmessage)
         # Resetting finalmessage to empty so !weederboard doesn't keep adding onto itself the next time it is used
         finalmessage = ""
