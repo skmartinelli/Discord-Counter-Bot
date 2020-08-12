@@ -5,7 +5,6 @@ import discord
 import json
 import asyncio
 
-
 # Initializing bot and variables
 client = discord.Client()
 finalmessage = ""
@@ -70,6 +69,13 @@ async def on_message(message):
         await message.channel.send("Weed counts saved :)")
         await client.close()
 
+    # minusweed is used for testing, so i can easily remove a weed from myself
+    if message.content.lower() == "!minusweed":
+        m[str(message.author.id)]["xp"] -= 1
+        await message.channel.send("weed subtracted")
+        
+
+
     # !weed returns personal weed count
     elif message.content == "!weed":
         await message.channel.send(str(m[str(message.author.id)]["xp"]) + " weeds" )
@@ -80,8 +86,11 @@ async def on_message(message):
         for member in client.get_guild(YOURGUILDSID).members:
             if not str(str(member).rstrip("#1234567890")).lower().endswith("bot") and not str(str(member).rstrip("#1234567890")).lower().endswith("rythm"):
                 finalmessage += (str(member).rstrip("#1234567890") + ": " + str(m[str(member.id)]["xp"]) +  " weeds \n")
+                # Finding the member with highest count
                 if int(str(m[str(member.id)]["xp"])) > weedercount:
+                    weedercount = int(str(m[str(member.id)]["xp"])) 
                     weeder = (str(member).rstrip("#1234567890"))
+                    await message.channel.send(weeder)
         finalmessage += "\n"
         finalmessage += "The current weeder is "
         finalmessage += weeder
@@ -97,6 +106,8 @@ async def on_message(message):
         if m[str(message.author.id)]["messageCountdown"] <= 0:
             m[str(message.author.id)]["xp"] += 1
             m[str(message.author.id)]["messageCountdown"] = 360
+            await message.channel.send("weed")
+
 
     # Some fun little animal messages because I thought it was nice :)
     elif message.author != client.user and message.content.lower() == "!duck":
@@ -107,6 +118,9 @@ async def on_message(message):
         await message.channel.send("mewow")
     elif message.author != client.user and message.content.lower() == "!frog":
         await message.channel.send("ribbit")
+    elif message.author != client.user and message.content.lower() == "!fwog":
+        await message.channel.send("You matter.")
+
 
 # Add new members to the json if they join the server
 @client.event
