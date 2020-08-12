@@ -109,8 +109,8 @@ async def on_message(message):
             await message.channel.send("weed")
             # adding an autosave, hope it works
             with open(YOURFILENAME, "w") as j:
-            j.write( json.dumps(m) )
-            j.close()
+                j.write( json.dumps(m) )
+                j.close()
 
 
 
