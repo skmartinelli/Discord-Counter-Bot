@@ -107,6 +107,11 @@ async def on_message(message):
             m[str(message.author.id)]["xp"] += 1
             m[str(message.author.id)]["messageCountdown"] = 360
             await message.channel.send("weed")
+            # adding an autosave, hope it works
+            with open(YOURFILENAME, "w") as j:
+            j.write( json.dumps(m) )
+            j.close()
+
 
 
     # Some fun little animal messages because I thought it was nice :)
