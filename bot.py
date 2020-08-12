@@ -1,3 +1,6 @@
+# If somebody is actually looking at this the keyphrase me and my friends used was "weed" because we like spamming weed in the chat at 4:20 am or pm because we have little pea brains
+
+
 import discord
 import json
 import asyncio
@@ -7,10 +10,10 @@ import asyncio
 client = discord.Client()
 finalmessage = ""
 
-YOURTOKEN = "NzQxNTA1NjA0NTM0Nzk2MzQ4.Xy4i6A.w8bXySm0-6NO31H9JVOXgv0NJxE"
-YOURGUILDSID = 691931904135397417
-YOURID = 146026805365571585
-YOURFILENAME = "whatever.json"
+YOURTOKEN = # Your token
+YOURGUILDSID = # Your server ID
+YOURID = # Your user ID
+YOURFILENAME = # Whatever file name you want
 
 #initializing empty json file
 m = {}
@@ -89,9 +92,6 @@ async def on_message(message):
         await message.channel.send("mewow")
     elif message.author != client.user and message.content.lower() == "!frog":
         await message.channel.send("ribbit")
-    elif message.author != client.user and message.content.lower() == "!fwog":
-        await message.channel.send("fuck")
-
 
 # Add new members to the json if they join the server
 @client.event
