@@ -90,7 +90,6 @@ async def on_message(message):
                 if int(str(m[str(member.id)]["xp"])) > weedercount:
                     weedercount = int(str(m[str(member.id)]["xp"])) 
                     weeder = (str(member).rstrip("#1234567890"))
-                    await message.channel.send(weeder)
         finalmessage += "\n"
         finalmessage += "The current weeder is "
         finalmessage += weeder
