@@ -111,7 +111,7 @@ async def on_message(message):
 
         finalmessage += " at "
         finalmessage += str(weedercount)
-        finalmessage += " weeds."
+        finalmessage += " weeds"
 
 
         await message.channel.send(finalmessage)
