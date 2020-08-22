@@ -57,8 +57,6 @@ async def on_message(message):
     # Getting variables
     global m
     global finalmessage
-    global weedercount
-    global weeder
 
 
     # Used to pause counters if you need to edit the script
@@ -83,16 +81,37 @@ async def on_message(message):
     # !weederboard returns weed count of whole server
     elif message.content == "!weederboard":
         # Getting weeds of whole server and putting into one string, so it doesn't spam chat
+        
+        weedercount = 0
+
         for member in client.get_guild(YOURGUILDSID).members:
             if not str(str(member).rstrip("#1234567890")).lower().endswith("bot") and not str(str(member).rstrip("#1234567890")).lower().endswith("rythm"):
                 finalmessage += (str(member).rstrip("#1234567890") + ": " + str(m[str(member.id)]["xp"]) +  " weeds \n")
                 # Finding the member with highest count
+                
+                # Once you get around to making sorted leaderboard, use selection sort
+                #   - iterates through and finds lowest element in the unsorted original array and places it into a sorted subarray
+            
                 if int(str(m[str(member.id)]["xp"])) > weedercount:
                     weedercount = int(str(m[str(member.id)]["xp"])) 
                     weeder = (str(member).rstrip("#1234567890"))
+                    tie = False
+
+                elif int(str(m[str(member.id)]["xp"])) == weedercount:
+                    weeder += " and " + (str(member).rstrip("#1234567890"))
+                    tie = True
+
         finalmessage += "\n"
-        finalmessage += "The current weeder is "
+        
+        if tie:
+            finalmessage += "The current weeders are "
+        else:
+            finalmessage += "The current weeder is "
         finalmessage += weeder
+
+        finalmessage += " at "
+        finalmessage += str(weedercount)
+        finalmessage += " weeds."
 
 
         await message.channel.send(finalmessage)
