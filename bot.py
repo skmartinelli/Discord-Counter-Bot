@@ -1,4 +1,5 @@
-# If somebody is actually looking at this the keyphrase me and my friends used was "weed" because we like spamming weed in the chat at 4:20 am or pm because we have little pea brains
+# If somebody is actually looking at this, the keyphrase me and my friends used was "weed" because we like spamming weed in the chat at 4:20 am or pm because we have little pea brains
+# baby's first discord bot please don't get mad at me
 
 
 import discord
@@ -11,7 +12,7 @@ finalmessage = ""
 weedercount = 0
 weeder = ""
 
-
+# Stopped running the bot so I don't much care if they key is public. I reset it anyways 
 YOURTOKEN = "NzQxNTA1NjA0NTM0Nzk2MzQ4.Xy4i6A.w8bXySm0-6NO31H9JVOXgv0NJxE"
 YOURGUILDSID = 691931904135397417
 YOURID = 146026805365571585
